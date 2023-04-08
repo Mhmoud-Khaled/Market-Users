@@ -1,0 +1,12 @@
+<app-selection [title]="'Categories'" [data]="categories" (selectedValue) = 'filterByCategory($event)'></app-selection>
+
+<div class="row mb-5" *ngIf="spinner" >
+  <div class="box col-sm-6 col-md-4 col-lg-3" *ngFor="let item of products">
+    <app-product [item]="item" (button) = addToCart($event)></app-product>
+  </div>
+
+</div>
+<div class="text-center w-100">
+  <app-spinner *ngIf="!spinner"></app-spinner>
+</div>
+

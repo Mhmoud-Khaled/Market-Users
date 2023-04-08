@@ -1,0 +1,68 @@
+<div class="card mt-3" style="min-width: 200px; cursor: pointer">
+  <div routerLink="/Details/{{ item.id }}">
+    <div class="img" style="height: 200px;">
+      <img
+        style="height: 100%"
+        src="{{ item.image }}"
+        class="card-img-top"
+        alt="..."
+      />
+    </div>
+    <div class="card-body">
+      <h5
+        class="card-title"
+        style="
+          font-size: 15px;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+        "
+      >
+        {{ item.title }}
+      </h5>
+      <p
+        class="card-text"
+        style="
+          font-size: 14px;
+          overflow: hidden;
+          height: 100px;
+          display: -webkit-box;
+          -webkit-line-clamp: 5;
+          -webkit-box-orient: vertical;
+        "
+      >
+        {{ item.description }}
+      </p>
+    </div>
+  </div>
+  <div class="price d-lg-flex justify-content-between align-items-center mx-3 mb-3">
+    <a *ngIf="addButton" class="btn btn-success" (click)="hidden()"
+      >Add To Cart</a
+    >
+    <div *ngIf="!addButton" style="display: flex">
+      <input
+        type="number"
+        min="1"
+        value="1"
+        style="width: 40px; margin-right: 5px"
+        [(ngModel)]="amount"
+      />
+      <a class="btn btn-success" (click)="add()">Add</a>
+    </div>
+    <p
+      class="mt-0 mb-0 px-2"
+      style="
+        border-radius: 20px;
+        border: 1px solid rgb(255, 136, 156);
+        min-width: 35%;
+        text-align: center;
+        background-color: rgb(243, 99, 123);
+        font-weight: bold;
+        color: white;
+      "
+    >
+      {{ item.price }} $
+    </p>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+<div
+  style="
+    border: 1px solid rgb(175, 175, 175);
+    border-radius: 10px;
+    margin-top: 80px;
+  "
+>
+  <h1 style="color: rgb(248, 110, 133); padding-left: 10px">Shopping Cart</h1>
+  <div
+    style="
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px 20px;
+    "
+  >
+    <p style="padding-left: 10px; font-weight: bold">
+      You have
+      <span style="color: rgb(248, 110, 133)">{{ products.length }}</span> item
+      in your cart
+    </p>
+    <button
+      style="color: rgb(255, 144, 162); border: transparent; border-radius: 5px"
+      (click)="clearDate()"
+    >
+      Clear Shopping Cart
+    </button>
+  </div>
+  <table class="table table-striped mt-3">
+    <thead style="text-align: center">
+      <th>Image</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th style="width: 100px;">Total</th>
+      <th>Action</th>
+    </thead>
+    <tbody style="text-align: center; vertical-align: middle">
+      <tr *ngFor="let item of products; let index = index">
+        <td>
+          <div style="max-width: 100px">
+            <img
+              src="{{ item.data.image }}"
+              alt="img"
+              style="width: 100%; text-align: center"
+            />
+          </div>
+        </td>
+        <td>{{ item.data.title }}</td>
+        <td style="width: 100px;">{{ item.data.price }}</td>
+        <td>
+          <button
+            class="btn btn-dark p-1"
+            style="
+              width: 30px;
+              text-align: center;
+              font-weight: bold;
+              margin-right: 5px;
+            "
+            (click)="plusQuantitiy(index)"
+          >
+            +
+          </button>
+          <input
+            type="number"
+            style="width: 50%; padding-left: 10px"
+            value="{{ item.quantity }}"
+            min="1"
+            [(ngModel)]="item.quantity"
+            (change)="detectChange()"
+          />
+          <button
+            class="btn btn-dark p-1"
+            style="
+              width: 30px;
+              text-align: center;
+              font-weight: bold;
+              margin-left: 5px;
+            "
+            (click)="minsQuantitiy(index)"
+          >
+            -
+          </button>
+        </td>
+        <td>{{ item.data.price * item.quantity }}</td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteProduct(index)">
+            Delete
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Total: {{ total }} $</td>
+        <td><button class="btn btn-success" (click)="submitOrder()">Order Now</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="alert alert-success mt-5" role="alert" *ngIf="success">
+  The Order Is Submitted
+</div>
